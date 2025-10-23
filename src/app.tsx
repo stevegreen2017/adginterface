@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Header, Sidebar } from '../components/ui';
 import { MyWorkScreen, RegisterScreen, ProcessingScreen, SuccessScreen, DetailScreen } from '../components/screens';
+import MyProjects from '../components/screens/ProjectScreen';
 import { Asset, Credential, Activity, Screen } from '../types';
 
 const StableShield = () => {
@@ -53,6 +54,10 @@ const StableShield = () => {
     setTimeout(() => setCurrentScreen('success'), 2000);
   };
 
+  const handleNavigateToProjects = () => {
+    setCurrentScreen('projects');
+  };
+
   return (
     <div className="h-screen flex flex-col" style={{ backgroundColor: '#f6f6f6' }}>
       <Header onNavigateToRegister={handleNavigateToRegister} />
@@ -82,6 +87,9 @@ const StableShield = () => {
             asset={selectedAsset}
             onNavigateToMyWork={handleNavigateToMyWork}
           />
+        )}
+        {currentScreen === 'projects' && (
+          <MyProjects onRegisterWork={(projectId: number) => setCurrentScreen('register')} />
         )}
       </div>
     </div>

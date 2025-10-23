@@ -1,7 +1,7 @@
 import React from 'react';
-import { Upload, TrendingUp, Hash, Clock, Eye, Star, Shield, ChevronRight, BadgeCheck, Zap, Users } from 'lucide-react';
+import { Upload, TrendingUp, Hash, Clock, Eye, Star, Shield, ChevronRight, BadgeCheck, Zap } from 'lucide-react';
 import { colors, surface } from '../../constants/theme';
-import { PrimaryButton, SecondaryButton } from '../ui';
+import { PrimaryButton } from '../ui';
 import { Asset, Credential, Activity } from '../../types';
 
 interface MyWorkScreenProps {
@@ -134,16 +134,6 @@ export const MyWorkScreen: React.FC<MyWorkScreenProps> = ({
               </div>
             ))}
           </div>
-        </div>
-
-        <div className="p-6 rounded-sm text-white" style={{ backgroundColor: colors.burgundy }}>
-          <h3 className="font-medium mb-3 flex items-center">Team: Nebula Rising</h3>
-          <div className="space-y-2 text-sm">
-            <div className="flex justify-between"><span className="text-gray-100">Team Members</span><span className="font-medium">8</span></div>
-            <div className="flex justify-between"><span className="text-gray-100">Protected Assets</span><span className="font-medium">127</span></div>
-            <div className="flex justify-between"><span className="text-gray-100">This Week</span><span className="font-medium">+14</span></div>
-          </div>
-          <button className="w-full mt-4 bg-white text-gray-900 py-2 rounded-sm text-sm hover:bg-gray-100">View Team Dashboard</button>
         </div>
       </div>
     </div>

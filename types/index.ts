@@ -29,4 +29,4 @@ export interface ContributionEntry {
   type: 'create' | 'reference' | 'contribution';
 }
 
-export type Screen = 'mywork' | 'register' | 'processing' | 'success' | 'detail';
+export type Screen = 'mywork' | 'register' | 'processing' | 'success' | 'detail' | 'projects';

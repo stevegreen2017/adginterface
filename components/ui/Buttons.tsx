@@ -8,7 +8,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 export const PrimaryButton: React.FC<ButtonProps> = ({ children, className = '', ...props }) => (
   <button
     {...props}
-    className={`px-5 py-2 text-white rounded-sm text-sm ${className}`}
+    className={`flex items-center justify-center px-5 py-2 text-white rounded-sm text-sm ${className}`}
     style={{ backgroundColor: colors.burgundy }}
   >
     {children}
@@ -18,7 +18,7 @@ export const PrimaryButton: React.FC<ButtonProps> = ({ children, className = '',
 export const SecondaryButton: React.FC<ButtonProps> = ({ children, className = '', ...props }) => (
   <button
     {...props}
-    className={`px-5 py-2 border border-gray-300 text-gray-800 rounded-sm text-sm hover:bg-gray-50 ${className}`}
+    className={`flex items-center justify-center px-5 py-2 border border-gray-300 text-gray-800 rounded-sm text-sm hover:bg-gray-50 ${className}`}
   >
     {children}
   </button>

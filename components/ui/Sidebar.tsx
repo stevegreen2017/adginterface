@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, Upload, Search, Users, Award } from 'lucide-react';
+import { Shield, Upload, Search, FolderOpen, Award } from 'lucide-react';
 import { colors } from '../../constants/theme';
 import { Screen } from '../../types';
 
@@ -33,9 +33,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentScreen, onNavigate }) =
         <Search className="w-4 h-4" />
         <span className="text-sm">Search Registry</span>
       </button>
-      <button className="w-full text-left px-4 py-2 rounded-sm flex items-center space-x-3 hover:bg-gray-800 transition">
-        <Users className="w-4 h-4" />
-        <span className="text-sm">My Teams</span>
+      <button
+        onClick={() => onNavigate('projects')}
+        className={`w-full text-left px-4 py-2 rounded-sm flex items-center space-x-3 transition ${
+          currentScreen === 'projects' ? 'bg-gray-800' : 'hover:bg-gray-800'
+        }`}
+      >
+        <FolderOpen className="w-4 h-4" />
+        <span className="text-sm">Projects</span>
       </button>
       <button className="w-full text-left px-4 py-2 rounded-sm flex items-center space-x-3 hover:bg-gray-800 transition">
         <Award className="w-4 h-4" />
