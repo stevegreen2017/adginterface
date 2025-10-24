@@ -54,6 +54,7 @@ const StableShield = () => {
   const [currentScreen, setCurrentScreen] = useState<Screen>('mywork');
   const [selectedAsset, setSelectedAsset] = useState<Asset | null>(null);
   const [selectedProject, setSelectedProject] = useState(mockProjects[0]);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const myAssets: Asset[] = [
     { id: 1, name: 'nebula_concept_v5.psd', type: 'Concept Art', registered: '2025-10-18', views: 342, references: 12, contributions: 1, verified: true },
@@ -111,6 +112,7 @@ const StableShield = () => {
       <Header 
         onNavigateToRegister={handleNavigateToRegister}
         onNavigateToProfile={() => setCurrentScreen('profile')}
+        onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
       />
       <div className="flex flex-1 overflow-hidden">
         <Sidebar 
@@ -119,6 +121,8 @@ const StableShield = () => {
           projects={mockProjects}
           selectedProject={selectedProject}
           onSelectProject={handleSelectProject}
+          isOpen={isSidebarOpen}
+          onClose={() => setIsSidebarOpen(false)}
         />
         {currentScreen === 'mywork' && (
           <MyWorkScreen

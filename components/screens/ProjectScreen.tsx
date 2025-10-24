@@ -249,20 +249,20 @@ export default function MyProjects({
   if (selectedProject) {
     return (
       <div className="flex-1 overflow-auto bg-gray-50">
-        <div className="p-4 bg-white border-b border-gray-200 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
+        <div className="p-4 md:p-4 bg-white border-b border-gray-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div className="flex items-center space-x-3 flex-wrap">
             <BarChart3 className="w-4 h-4 text-gray-700" />
-            <h1 className="text-xl font-medium text-gray-900">Project Dashboard</h1>
+            <h1 className="text-lg md:text-xl font-medium text-gray-900">Project Dashboard</h1>
             <div className="text-xs text-gray-600">{selectedProject?.name} • {selectedProject?.code}</div>
           </div>
         </div>
 
         {/* Snapshot */}
-        <div className="p-6 grid grid-cols-3 gap-4">
+        <div className="p-4 md:p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <div className={`${surface.base} p-4 rounded-sm`}>
             <div className="text-xs text-gray-600 mb-3">Total Assets</div>
             <div className="text-2xl font-medium text-gray-900 mb-3">{dash?.totals.assets ?? 0}</div>
-            <div className="flex items-center gap-1">
+            <div className="flex flex-wrap items-center gap-1">
               <button
                 onClick={() => setTimeRange('all')}
                 className={`px-2 py-1 text-xs rounded-sm ${
@@ -318,10 +318,10 @@ export default function MyProjects({
 
         {/* Team Members List (when expanded) */}
         {showAllMembers && (
-          <div className="px-6 pb-6">
+          <div className="px-4 md:px-6 pb-6">
             <div className={`${surface.base} rounded-sm`}>
-              <div className="px-4 py-3 border-b border-gray-200 flex items-center justify-between">
-                <div className="flex items-center space-x-3">
+              <div className="px-4 py-3 border-b border-gray-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <div className="flex flex-wrap items-center gap-2">
                   <div className="text-sm font-medium text-gray-900">Team Members</div>
                   <select
                     value={memberRoleFilter}
@@ -399,8 +399,8 @@ export default function MyProjects({
 
         {/* Sparkline + quick actions */}
         {!showAllMembers && (
-        <div className="px-6 grid grid-cols-3 gap-6">
-          <div className={`${surface.base} rounded-sm p-4 col-span-2`}>
+        <div className="px-4 md:px-6 grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
+          <div className={`${surface.base} rounded-sm p-4 lg:col-span-2`}>
             <div className="text-sm font-medium text-gray-900 mb-2 flex items-center">
               <FilterIcon className="w-4 h-4 mr-2" />
               Contribution timeline
@@ -429,8 +429,8 @@ export default function MyProjects({
 
         {/* Table + member bars */}
         {!showAllMembers && (
-        <div className="px-6 grid grid-cols-3 gap-6 py-6">
-          <div className="col-span-2">
+        <div className="px-4 md:px-6 grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 py-4 md:py-6">
+          <div className="lg:col-span-2">
             <div className={`${surface.base} rounded-sm overflow-hidden`}>
               <div className="px-4 py-3 border-b border-gray-200">
                 <div className="text-sm font-medium text-gray-900 mb-3">Files</div>
@@ -444,7 +444,7 @@ export default function MyProjects({
                   />
                 </div>
               </div>
-              <div className="px-4 py-2 border-b border-gray-200 grid grid-cols-12 text-xs font-medium text-gray-600 uppercase">
+              <div className="hidden md:grid px-4 py-2 border-b border-gray-200 grid-cols-12 text-xs font-medium text-gray-600 uppercase">
                 <div className="col-span-6">File Name</div>
                 <div className="col-span-3">Contributor</div>
                 <div className="col-span-2">Department</div>
@@ -452,11 +452,20 @@ export default function MyProjects({
               </div>
               <div className="divide-y divide-gray-200">
                 {filteredRows.map(row => (
-                  <div key={row.id} className="px-4 py-3 grid grid-cols-12 text-sm">
-                    <div className="col-span-6 truncate text-gray-900">{row.asset}</div>
-                    <div className="col-span-3 text-gray-700">{row.member}</div>
-                    <div className="col-span-2 text-gray-700">{row.dept}</div>
-                    <div className="col-span-1 text-gray-500">{row.date}</div>
+                  <div key={row.id} className="px-4 py-3">
+                    {/* Mobile: Stacked layout */}
+                    <div className="md:hidden space-y-1">
+                      <div className="text-sm font-medium text-gray-900">{row.asset}</div>
+                      <div className="text-xs text-gray-600">{row.member} • {row.dept}</div>
+                      <div className="text-xs text-gray-500">{row.date}</div>
+                    </div>
+                    {/* Desktop: Grid layout */}
+                    <div className="hidden md:grid grid-cols-12 text-sm">
+                      <div className="col-span-6 truncate text-gray-900">{row.asset}</div>
+                      <div className="col-span-3 text-gray-700">{row.member}</div>
+                      <div className="col-span-2 text-gray-700">{row.dept}</div>
+                      <div className="col-span-1 text-gray-500">{row.date}</div>
+                    </div>
                   </div>
                 ))}
                 {!filteredRows.length && (
@@ -475,8 +484,8 @@ export default function MyProjects({
 
         {/* Add Member Modal */}
         {showAddModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={() => setShowAddModal(false)}>
-            <div className="bg-white rounded-sm p-6 w-96" onClick={e => e.stopPropagation()}>
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" onClick={() => setShowAddModal(false)}>
+            <div className="bg-white rounded-sm p-4 md:p-6 w-full max-w-md" onClick={e => e.stopPropagation()}>
               <h2 className="text-lg font-medium text-gray-900 mb-4">Invite Team Member</h2>
               <div className="space-y-3">
                 <div>
@@ -545,12 +554,12 @@ export default function MyProjects({
   // Show empty state if no project selected
   return (
     <div className="flex-1 overflow-auto bg-gray-50">
-      <div className="p-4 bg-white border-b border-gray-200 flex items-center justify-between">
+      <div className="p-4 bg-white border-b border-gray-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <div className="flex items-center space-x-3">
           <Folder className="w-4 h-4 text-gray-700" />
           <h1 className="text-xl font-medium text-gray-900">My Projects</h1>
         </div>
-        <div className="flex items-center space-x-2">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto">
           <div className="relative">
             <Search className="w-4 h-4 text-gray-500 absolute left-3 top-2.5" />
             <input

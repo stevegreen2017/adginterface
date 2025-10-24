@@ -112,9 +112,9 @@ export default function ProfileScreen() {
 
   return (
     <div className="flex-1 overflow-auto bg-gray-50">
-      <div className="max-w-4xl mx-auto p-8">
+      <div className="max-w-4xl mx-auto p-4 md:p-8">
         {/* Header with Edit Button */}
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6">
           <h1 className="text-2xl font-medium text-gray-900">My Profile</h1>
           <button
             onClick={isEditing ? handleSaveProfile : handleEditToggle}
@@ -137,7 +137,7 @@ export default function ProfileScreen() {
 
         {/* Analytics Cards */}
         <div className="grid grid-cols-2 gap-4 mb-6">
-          <div className={`${surface.base} rounded-sm p-4`}>
+          <div className={`${surface.base} rounded-sm p-3 md:p-4`}>
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs text-gray-600 mb-1">Profile Views</p>
@@ -148,7 +148,7 @@ export default function ProfileScreen() {
               </div>
             </div>
           </div>
-          <div className={`${surface.base} rounded-sm p-4`}>
+          <div className={`${surface.base} rounded-sm p-3 md:p-4`}>
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs text-gray-600 mb-1">Link Clicks</p>
@@ -162,8 +162,8 @@ export default function ProfileScreen() {
         </div>
 
         {/* Profile Card */}
-        <div className={`${surface.base} rounded-sm p-6 mb-6`}>
-          <div className="flex items-start gap-6 mb-6">
+        <div className={`${surface.base} rounded-sm p-4 md:p-6 mb-6`}>
+          <div className="flex flex-col sm:flex-row items-start gap-4 md:gap-6 mb-6">
             {/* Profile Picture */}
             <div className="flex-shrink-0">
               <div className="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 text-2xl font-medium">
@@ -251,7 +251,7 @@ export default function ProfileScreen() {
         </div>
 
         {/* Organizations */}
-        <div className={`${surface.base} rounded-sm p-6 mb-6`}>
+        <div className={`${surface.base} rounded-sm p-4 md:p-6 mb-6`}>
           <h3 className="text-lg font-medium text-gray-900 mb-4">Organizations</h3>
           <div className="space-y-2">
             {mockOrganizations.map((org, idx) => (
@@ -285,7 +285,7 @@ export default function ProfileScreen() {
         </div>
 
         {/* Social Links */}
-        <div className={`${surface.base} rounded-sm p-6 mb-6`}>
+        <div className={`${surface.base} rounded-sm p-4 md:p-6 mb-6`}>
           <h3 className="text-lg font-medium text-gray-900 mb-4">Social Links</h3>
           <div className="space-y-3">
             {socialLinks.map((link, idx) => (

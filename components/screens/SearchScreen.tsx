@@ -233,9 +233,9 @@ export default function SearchScreen() {
         </div>
       </div>
 
-      <div className="p-6 max-w-6xl mx-auto">
+      <div className="p-4 md:p-6 max-w-6xl mx-auto">
         {/* Search Type Tabs */}
-        <div className="flex gap-2 mb-6">
+        <div className="flex flex-col sm:flex-row gap-2 mb-6">
           <button
             onClick={() => {
               setSearchType('image')
@@ -303,7 +303,7 @@ export default function SearchScreen() {
 
               {/* Upload Section */}
               <div
-                className="bg-white border-2 border-dashed border-gray-300 rounded-sm p-16 text-center hover:border-gray-400 hover:bg-gray-50 transition-colors cursor-pointer"
+                className="bg-white border-2 border-dashed border-gray-300 rounded-sm p-8 md:p-16 text-center hover:border-gray-400 hover:bg-gray-50 transition-colors cursor-pointer"
                 onClick={() => setShowImageSelection(true)}
               >
                 <div className="w-16 h-16 mx-auto mb-4 border border-gray-300 rounded-sm flex items-center justify-center">

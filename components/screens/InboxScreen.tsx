@@ -111,7 +111,9 @@ export default function InboxScreen() {
   return (
     <div className="flex-1 flex overflow-hidden bg-gray-50">
       {/* Message List */}
-      <div className="w-96 bg-white border-r border-gray-200 flex flex-col">
+      <div className={`w-full md:w-96 bg-white border-r border-gray-200 flex flex-col ${
+        selectedMessage ? 'hidden md:flex' : 'flex'
+      }`}>
         {/* Header */}
         <div className="p-4 border-b border-gray-200">
           <div className="flex items-center justify-between mb-3">
@@ -201,11 +203,20 @@ export default function InboxScreen() {
       </div>
 
       {/* Message Detail */}
-      <div className="flex-1 flex flex-col">
+      <div className={`flex-1 flex flex-col ${
+        selectedMessage ? 'flex' : 'hidden md:flex'
+      }`}>
         {selectedMessage ? (
           <>
             {/* Message Header */}
-            <div className="p-6 bg-white border-b border-gray-200">
+            <div className="p-4 md:p-6 bg-white border-b border-gray-200">
+              {/* Mobile Back Button */}
+              <button
+                onClick={() => setSelectedMessage(null)}
+                className="md:hidden mb-3 text-sm text-gray-600 hover:text-gray-900 flex items-center gap-1"
+              >
+                ← Back to messages
+              </button>
               <div className="flex items-start justify-between mb-4">
                 <div className="flex-1">
                   <h2 className="text-lg font-medium text-gray-900 mb-2">{selectedMessage.subject}</h2>
@@ -264,7 +275,7 @@ export default function InboxScreen() {
             </div>
 
             {/* Message Body */}
-            <div className="flex-1 overflow-auto p-6">
+            <div className="flex-1 overflow-auto p-4 md:p-6">
               <div className={`${surface.base} rounded-sm p-6`}>
                 <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-wrap">
                   {selectedMessage.message}

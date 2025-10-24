@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Shield, Upload, Search, FolderOpen, Inbox, ChevronDown, ChevronRight, Folder, Archive, Plus } from 'lucide-react';
+import { Shield, Upload, Search, FolderOpen, Inbox, ChevronDown, ChevronRight, Folder, Archive, Plus, X } from 'lucide-react';
 import { colors } from '../../constants/theme';
 import { Screen } from '../../types';
 
@@ -20,6 +20,8 @@ interface SidebarProps {
   projects?: Project[];
   selectedProject?: Project | null;
   onSelectProject?: (project: Project) => void;
+  isOpen: boolean;
+  onClose: () => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ 
@@ -27,7 +29,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onNavigate,
   projects = [],
   selectedProject,
-  onSelectProject
+  onSelectProject,
+  isOpen,
+  onClose
 }) => {
   const [projectsExpanded, setProjectsExpanded] = useState(true);
   const [activeExpanded, setActiveExpanded] = useState(true);
@@ -37,11 +41,41 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const activeProjects = projects.filter(p => p.status === 'Active');
   const archivedProjects = projects.filter(p => p.status === 'On Hold');
 
+  const handleNavigate = (screen: Screen) => {
+    onNavigate(screen);
+    onClose(); // Close sidebar on mobile after navigation
+  };
+
   return (
-  <div className="w-64" style={{ backgroundColor: colors.charcoal }}>
+  <>
+    {/* Mobile Overlay */}
+    {isOpen && (
+      <div 
+        className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+        onClick={onClose}
+      />
+    )}
+    
+    {/* Sidebar */}
+    <div 
+      className={`w-64 fixed lg:static inset-y-0 left-0 z-50 transform transition-transform duration-300 ease-in-out lg:transform-none ${
+        isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+      }`}
+      style={{ backgroundColor: colors.charcoal }}
+    >
+      {/* Mobile Close Button */}
+      <div className="lg:hidden p-4 flex justify-end">
+        <button
+          onClick={onClose}
+          className="p-2 hover:bg-gray-800 rounded-sm text-white"
+          aria-label="Close sidebar"
+        >
+          <X className="w-5 h-5" />
+        </button>
+      </div>
     <nav className="p-6 space-y-2 text-white">
       <button
-        onClick={() => onNavigate('mywork')}
+        onClick={() => handleNavigate('mywork')}
         className={`w-full text-left px-4 py-2 rounded-sm flex items-center space-x-3 transition ${
           currentScreen === 'mywork' || currentScreen === 'detail' ? 'bg-gray-800' : 'hover:bg-gray-800'
         }`}
@@ -50,7 +84,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <span className="text-sm">My Work</span>
       </button>
       <button
-        onClick={() => onNavigate('register')}
+        onClick={() => handleNavigate('register')}
         className={`w-full text-left px-4 py-2 rounded-sm flex items-center space-x-3 transition ${
           currentScreen === 'register' || currentScreen === 'processing' || currentScreen === 'success' ? 'bg-gray-800' : 'hover:bg-gray-800'
         }`}
@@ -59,7 +93,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <span className="text-sm">Register Work</span>
       </button>
       <button
-        onClick={() => onNavigate('search')}
+        onClick={() => handleNavigate('search')}
         className={`w-full text-left px-4 py-2 rounded-sm flex items-center space-x-3 transition ${
           currentScreen === 'search' ? 'bg-gray-800' : 'hover:bg-gray-800'
         }`}
@@ -171,7 +205,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         )}
       </div>
       <button
-        onClick={() => onNavigate('inbox')}
+        onClick={() => handleNavigate('inbox')}
         className={`w-full text-left px-4 py-2 rounded-sm flex items-center transition ${
           currentScreen === 'inbox' ? 'bg-gray-800' : 'hover:bg-gray-800'
         }`}
@@ -192,5 +226,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
       </div>
     </div>
   </div>
+  </>
   );
 };
