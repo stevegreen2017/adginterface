@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Shield, Upload, Search, FolderOpen, Inbox, ChevronDown, ChevronRight, Folder, Archive, Plus, User } from 'lucide-react';
+import { Shield, Upload, Search, FolderOpen, Inbox, ChevronDown, ChevronRight, Folder, Archive, Plus } from 'lucide-react';
 import { colors } from '../../constants/theme';
 import { Screen } from '../../types';
 
@@ -32,7 +32,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const [projectsExpanded, setProjectsExpanded] = useState(true);
   const [activeExpanded, setActiveExpanded] = useState(true);
   const [archivedExpanded, setArchivedExpanded] = useState(false);
-  const [profileExpanded, setProfileExpanded] = useState(false);
 
   // Separate projects by status
   const activeProjects = projects.filter(p => p.status === 'Active');
@@ -171,38 +170,18 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </div>
         )}
       </div>
-      {/* Expandable My Profile */}
-      <div>
-        <button
-          onClick={() => setProfileExpanded(!profileExpanded)}
-          className="w-full text-left px-4 py-2 rounded-sm flex items-center justify-between hover:bg-gray-800 transition"
-        >
-          <div className="flex items-center space-x-3">
-            <User className="w-4 h-4" />
-            <span className="text-sm">My Profile</span>
-          </div>
-          {profileExpanded ? (
-            <ChevronDown className="w-4 h-4" />
-          ) : (
-            <ChevronRight className="w-4 h-4" />
-          )}
-        </button>
-
-        {profileExpanded && (
-          <div className="ml-6 space-y-1 mt-2">
-            <button
-              onClick={() => onNavigate('inbox')}
-              className={`w-full text-left px-3 py-1 rounded-sm flex items-center space-x-2 hover:bg-gray-800 transition ${
-                currentScreen === 'inbox' ? 'bg-gray-700 text-white' : 'text-gray-400'
-              }`}
-            >
-              <Inbox className="w-4 h-4" />
-              <span className="text-xs">Inbox</span>
-              <span className="ml-auto text-xs bg-red-500 text-white px-1.5 py-0.5 rounded-sm">3</span>
-            </button>
-          </div>
-        )}
-      </div>
+      <button
+        onClick={() => onNavigate('inbox')}
+        className={`w-full text-left px-4 py-2 rounded-sm flex items-center transition ${
+          currentScreen === 'inbox' ? 'bg-gray-800' : 'hover:bg-gray-800'
+        }`}
+      >
+        <div className="flex items-center space-x-3 flex-1">
+          <Inbox className="w-4 h-4" />
+          <span className="text-sm">Inbox</span>
+        </div>
+        <span className="text-xs bg-red-500 text-white px-1.5 py-0.5 rounded-sm">3</span>
+      </button>
     </nav>
     <div className="px-6 pb-6 text-xs text-gray-300">
       <div className="pt-6 border-t border-gray-800 uppercase tracking-wide mb-3">This Month</div>

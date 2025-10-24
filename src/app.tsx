@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Header, Sidebar } from '../components/ui';
-import { MyWorkScreen, RegisterScreen, ProcessingScreen, SuccessScreen, DetailScreen, InboxScreen } from '../components/screens';
+import { MyWorkScreen, RegisterScreen, ProcessingScreen, SuccessScreen, DetailScreen, InboxScreen, ProfileScreen } from '../components/screens';
 import MyProjects from '../components/screens/ProjectScreen';
 import SearchScreen from '../components/screens/SearchScreen';
 import { Asset, Credential, Activity, Screen } from '../types';
@@ -108,7 +108,10 @@ const StableShield = () => {
 
   return (
     <div className="h-screen flex flex-col" style={{ backgroundColor: '#f6f6f6' }}>
-      <Header onNavigateToRegister={handleNavigateToRegister} />
+      <Header 
+        onNavigateToRegister={handleNavigateToRegister}
+        onNavigateToProfile={() => setCurrentScreen('profile')}
+      />
       <div className="flex flex-1 overflow-hidden">
         <Sidebar 
           currentScreen={currentScreen} 
@@ -152,6 +155,7 @@ const StableShield = () => {
         )}
         {currentScreen === 'search' && <SearchScreen />}
         {currentScreen === 'inbox' && <InboxScreen />}
+        {currentScreen === 'profile' && <ProfileScreen />}
       </div>
     </div>
   );
