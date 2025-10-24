@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Upload, ChevronRight, ChevronLeft, CheckCircle, AlertCircle, ChevronDown, Hash, Image, AlertTriangle, Check, X, Copy, Eye, Plus, Send } from 'lucide-react';
+import { Upload, ChevronRight, ChevronLeft, CheckCircle, AlertCircle, ChevronDown, Image, AlertTriangle, X, Send } from 'lucide-react';
 import { colors, surface } from '../../constants/theme';
 import { PrimaryButton, SecondaryButton } from '../ui';
 
